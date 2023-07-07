@@ -1,0 +1,39 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+	{% if searched %}
+		<h1>You Searched For {{ searched }}</h1>
+		<br/>
+
+
+
+		{% for venue in venues %}
+			
+			<div class="card">
+  <div class="card-header">
+    Department
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ venue }}</h5>
+    <p class="card-text">
+
+
+
+    </p>
+  </div>
+</div>
+	<br/>
+
+
+		{% endfor %}
+	
+	{% else %}
+		<h1>Hey! You Forgot To Search...</h1>
+	{% endif %}
+
+	
+
+	
+	
+{% endblock %}

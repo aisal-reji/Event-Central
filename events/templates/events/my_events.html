@@ -1,0 +1,42 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+	
+	<h1 class="display-3">My Events</h1>
+	<br/>
+{%if events%}	
+{% for event in events %}
+<div class="card">
+  <div class="card-header">
+    {{ event }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Department: {{ event.venue }}</h5>
+    <p class="card-text">
+    	<ul>
+<li>Date: {{ event.event_date }}</li>
+<li>Days Till Event: {{ event.Days_till }}</li>
+<li>Occured: {{ event.Is_Past}}</li>
+<li>Description: {{ event.description }}</li>
+<li>Approved: {{ event.approved }}</li>
+</ul>
+
+</p>
+  </div>
+      <div class="card-footer text-muted">
+        
+        <a href="{% url 'show-attendees' event.id %}" class="btn btn-outline-secondary btn-sm">Show Attendees</a>
+        
+      </div>
+</div>
+
+
+
+<br/><br/>
+
+{% endfor %}
+
+{%else%}
+<h3 class="font-monospace">No events posted</h3>
+{%endif%}
+{% endblock %}

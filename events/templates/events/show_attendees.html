@@ -1,0 +1,25 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+<br><br>
+{%if attendees %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Mgits Id</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for i in attendees%}
+      <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.mgitsid}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  {%else%}
+  <h4 class="display-5"> No attendees yet registered<h4>
+{%endif%}
+{% endblock %}

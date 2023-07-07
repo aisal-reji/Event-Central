@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary p-3">
+  <div class="container-fluid">
+    <a class="navbar-brand font-monospace" href="{% url 'home' %}">EventCentral</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Events
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'list-events' %}">All Events</a></li>
+            {% if user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url 'my-events' %}">My Events</a></li>
+            <li><a class="dropdown-item" href="{% url 'add-event' %}">Add Event</a></li>
+            {% endif %}
+
+            
+          </ul>
+        </li>
+
+
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Departments
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'list-venues' %}">All Departments</a></li>
+            {% if user.is_superuser %}
+            <li><a class="dropdown-item" href="{% url 'add-venue' %}">Add Department</a></li>
+             {% endif %}
+            
+          </ul>
+        {% if user.is_superuser %}
+        </li>   
+         <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_approval' %}">Admin</a>
+        </li>
+   {% endif %}
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register_user' %}">Register</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+      {% endif %}
+
+      </ul>
+      <form class="d-flex" method=POST action="{% url 'search-venues' %}">
+        {% csrf_token %}
+
+        <input class="form-control me-2" type="search" placeholder="Search Departments/Clubs" aria-label="Search" name="searched">
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
